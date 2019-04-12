@@ -45,5 +45,6 @@ public class BTest {
         System.out.println(dolla.countLeaves());
         System.out.println(dolla.height());
         System.out.println(dolla.isBalanced());
+        dolla.sprout();
     }
 }

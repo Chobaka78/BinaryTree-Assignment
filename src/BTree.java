@@ -270,6 +270,56 @@ public class BTree{ // BTree class contains all the functions
             add(b.getVal());
         }
     }
+
+//    public void sprout(){
+//        BNode tmp = null;
+//        sprout(root, tmp);
+//    }
+//
+//    public void sprout(BNode branch, BNode addbranch){
+//        if(branch.getLeft() == null || branch.getRight() == null){
+//            add((addbranch.getVal() + branch.getVal())/2);
+//        }
+//        else if(branch.getLeft().getLeft() == null){
+//            addbranch = branch;
+//        }
+//        else if (branch.getLeft().getRight() == null){
+//            addbranch = branch;
+//        }
+//        else if(branch.getRight().getRight() == null){
+//            addbranch = branch;
+//        }
+//        else {
+//            sprout(branch.getLeft(), addbranch);
+//            sprout(branch.getRight(), addbranch);
+//        }
+//    }
+
+    public void sprout(){
+        sprout(root);
+    }
+
+    public void sprout(BNode temp) {
+        int val;
+        if (temp == null) {
+            return;
+        }
+        else if (temp.getRight().getLeft() == null && temp.getRight().getRight() == null || temp.getLeft().getLeft() == null && temp.getLeft().getRight() == null) {
+            if (temp.getRight().getLeft() == null && temp.getRight().getRight() == null) {
+                val = (temp.getVal() + temp.getRight().getVal()) / 2;
+                temp.getRight().setLeft(new BNode(val));
+            }
+            if (temp.getLeft().getLeft() == null && temp.getLeft().getRight() == null){
+                val = (temp.getVal() + temp.getLeft().getVal()) /2;
+                temp.getLeft().setRight(new BNode(val));
+            }
+        }
+        else {
+            sprout(temp.getRight());
+            sprout(temp.getLeft());
+        }
+    }
+
     @Override
     public String toString(){ // this method will print the Btree in a nice (see - able way)
         return ("<" + stringify(root) + ">").replace(", >", ">");
